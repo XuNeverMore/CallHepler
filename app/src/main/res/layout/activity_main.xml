@@ -3,7 +3,13 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    
+
+    <TextView
+        android:text="通知栏权限"
+        android:id="@+id/tv_notification_status"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <TextView
         android:layout_margin="20dp"
         android:text="自动接听自动挂断demo"

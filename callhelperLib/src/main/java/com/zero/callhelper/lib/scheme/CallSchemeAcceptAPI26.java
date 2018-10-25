@@ -16,13 +16,13 @@ import java.util.List;
  */
 
 public class CallSchemeAcceptAPI26 implements ICallSchemeAccept {
-    
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void acceptCall(Context context) {
         /* 模拟耳机插入动作,用于接听电话 */
         /* 由于Android8.0的限制, 这里通过通知栏去触发模拟事件, 算是走了个大弯 */
-        MediaSessionManager mediaSessionManager =  (MediaSessionManager)
+        MediaSessionManager mediaSessionManager = (MediaSessionManager)
                 context.getApplicationContext().getSystemService(Context.MEDIA_SESSION_SERVICE);
         List<MediaController> mediaControllerList = mediaSessionManager
                 .getActiveSessions(new ComponentName(context.getApplicationContext(), CallNotiReceiverService.class));
@@ -40,5 +40,5 @@ public class CallSchemeAcceptAPI26 implements ICallSchemeAccept {
         public CallNotiReceiverService() {
         }
     }
-    
+
 }
