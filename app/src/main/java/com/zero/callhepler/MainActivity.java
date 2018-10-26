@@ -38,14 +38,15 @@ public class MainActivity extends Activity {
         startService(new Intent(this, CallService.class));
         mTvNotiStatus = findViewById(R.id.tv_notification_status);
 
+        //通知访问权限
         mTvNotiStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoNotificationAccessSetting(MainActivity.this);
             }
         });
-
         mBtnWindowPermission = findViewById(R.id.btn_window_permission);
+
         //悬浮窗权限
         if (!WindowUtil.hasFloatingWindowPermission(this)) {
             mBtnWindowPermission.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +55,8 @@ public class MainActivity extends Activity {
                     WindowUtil.openWindowPermissionSettingPage(MainActivity.this, REQUEST_CODE_WINDOW_SETTING);
                 }
             });
+        }else {
+            mBtnWindowPermission.setSelected(true);
         }
 
         //电话权限

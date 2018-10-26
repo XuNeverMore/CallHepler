@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".CallWorkActivity" android:theme="@style/AppTheme.NoAnim"/>
+        <activity android:name=".CallWorkActivity" />
 
         <receiver android:name=".CallReceiver">
             <intent-filter android:priority="1000">

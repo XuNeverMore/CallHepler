@@ -103,6 +103,7 @@ public class FloatingWindow implements IFloatingWindow {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN|
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
         layoutParams.format = PixelFormat.TRANSPARENT;
+
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.x = 0;

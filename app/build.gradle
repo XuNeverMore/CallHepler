@@ -17,8 +17,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    android.applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                outputFileName = "${variant.applicationId}_${variant.versionName}_${releaseTime()}.apk"
+            }
+        }
 }
-
+static def releaseTime() {
+    return new Date().format("yyyyMMddHHmm")
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
