@@ -27,8 +27,9 @@ public class CallHelper {
             } else {
                 mICallSchemeAccept = new CallSchemeAcceptAPI26_23();
             }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mICallSchemeAccept = new CallSchemeAcceptAPI26();
+
         } else if (android.os.Build.VERSION.SDK_INT >= 19) {
             mICallSchemeAccept = new CallSchemeAcceptAPI19();
         } else {

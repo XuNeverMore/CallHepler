@@ -4,7 +4,9 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,26 +19,40 @@ import com.zero.callhepler.windows.IFloatingWindow;
 
 public class CallReceiver extends BroadcastReceiver {
 
-
+    private Context mContext;
     private IFloatingWindow mWindow;
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (!intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
-            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
-            int currentCallState = telephonyManager.getCallState();
-            switch (currentCallState) {
-                case TelephonyManager.CALL_STATE_RINGING:
-                    String phoneNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+    private PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
+        @Override
+        public void onCallStateChanged(int state, String phoneNumber) {
+            super.onCallStateChanged(state, phoneNumber);
+            switch (state) {
+                case TelephonyManager.CALL_STATE_RINGING://响铃
                     if (mWindow == null) {
-                        mWindow = showCallWindow(context, phoneNumber);
+                        mWindow = showCallWindow(mContext, phoneNumber);
+                    }
+                    break;
+
+                case TelephonyManager.CALL_STATE_IDLE://挂断
+                    if (mWindow != null) {
+                        mWindow.dismiss();
                     }
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK:
-                    break;
-                case TelephonyManager.CALL_STATE_IDLE:
+
                     break;
             }
+
+        }
+    };
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        this.mContext = context;
+        if (!TextUtils.equals(intent.getAction(), Intent.ACTION_NEW_OUTGOING_CALL)) {
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
+            assert tm != null;
+            tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+
         }
     }
 

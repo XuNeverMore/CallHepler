@@ -1,5 +1,6 @@
 package com.zero.callhelper.lib.scheme;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.media.session.MediaController;
@@ -35,6 +36,7 @@ public class CallSchemeAcceptAPI26 implements ICallSchemeAccept {
         }
     }
 
+    @SuppressLint("OverrideAbstract")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static class CallNotiReceiverService extends NotificationListenerService {
         public CallNotiReceiverService() {
